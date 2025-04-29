@@ -3,130 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salary Increment Decider</title>
+  <title>Salary Increment Decision Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #f0f8ff, #ffffff);
-      padding: 40px;
-      max-width: 900px;
-      margin: auto;
-      color: #333;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
     }
     h1 {
       text-align: center;
       color: #0d47a1;
-      font-size: 2.2em;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     label {
-      display: block;
-      margin-top: 20px;
       font-weight: 600;
-      font-size: 1.05em;
+      margin-top: 15px;
+      display: block;
+      font-size: 1em;
+      color: #333;
     }
     select, input[type="number"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      background-color: #f9f9f9;
+      background: #f9f9f9;
       font-size: 1em;
     }
     button {
-      margin-top: 30px;
-      padding: 14px;
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
       background-color: #0d47a1;
       color: white;
-      font-size: 16px;
+      font-size: 1.1em;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
     button:hover {
       background-color: #1565c0;
+      transform: scale(1.03);
     }
     .result {
-      margin-top: 30px;
+      margin-top: 25px;
       padding: 20px;
-      background-color: #f1f8e9;
-      border: 1px solid #c5e1a5;
-      border-radius: 6px;
-      font-size: 1.1em;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: 500;
+    }
+    .approve {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+    }
+    .consider {
+      background-color: #fff8e1;
+      color: #f9a825;
+      border: 1px solid #ffe082;
+    }
+    .decline {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #ef9a9a;
     }
   </style>
 </head>
 <body>
-  <h1>Salary Increment Decision Tool</h1>
+  <div class="container">
+    <h1>Salary Increment Decision</h1>
 
-  <label for="months">Months With Us</label>
-  <input type="number" id="months" min="0">
+    <label>Months With Us</label>
+    <input type="number" id="months" min="0">
 
-  <label for="visa">Visa Type</label>
-  <select id="visa">
-    <option value="GC_USC">GC / USC</option>
-    <option value="H1B">H1B</option>
-    <option value="Others">Others</option>
-  </select>
+    <label>Visa Type</label>
+    <select id="visa">
+      <option value="GC_USC">GC / USC</option>
+      <option value="H1B">H1B</option>
+      <option value="Others">Others</option>
+    </select>
 
-  <label for="obligation">Visa Obligation if GC</label>
-  <select id="obligation">
-    <option value="filed">Filed less than 6 months ago</option>
-    <option value="not_filed">Not Filed</option>
-  </select>
+    <label>Visa Obligation if GC</label>
+    <select id="obligation">
+      <option value="filed">Filed &lt; 6 months ago</option>
+      <option value="not_filed">Not Filed</option>
+    </select>
 
-  <label for="vendor">Contact with Prime Vendor</label>
-  <select id="vendor">
-    <option value="high">High</option>
-    <option value="mid">Mid</option>
-    <option value="low">Low</option>
-  </select>
+    <label>Contact with Prime Vendor</label>
+    <select id="vendor">
+      <option value="high">High</option>
+      <option value="mid">Mid</option>
+      <option value="low">Low</option>
+    </select>
 
-  <label for="referral">Candidate Referral Probability</label>
-  <select id="referral">
-    <option value="high">High</option>
-    <option value="mid">Mid</option>
-    <option value="low">Low</option>
-  </select>
+    <label>Candidate Referral Probability</label>
+    <select id="referral">
+      <option value="high">High</option>
+      <option value="mid">Mid</option>
+      <option value="low">Low</option>
+    </select>
 
-  <label for="withdrawal">Withdrawal Risk (in 6 months)</label>
-  <select id="withdrawal">
-    <option value="low">Low</option>
-    <option value="mid">Mid</option>
-    <option value="high">High</option>
-  </select>
+    <label>Withdrawal Risk (next 6 months)</label>
+    <select id="withdrawal">
+      <option value="low">Low</option>
+      <option value="mid">Mid</option>
+      <option value="high">High</option>
+    </select>
 
-  <label for="margin">New Margin</label>
-  <select id="margin">
-    <option value="high">More than 22</option>
-    <option value="mid">20 - 22</option>
-    <option value="low">Less than 20</option>
-  </select>
+    <label>New Margin</label>
+    <select id="margin">
+      <option value="high">More than 22</option>
+      <option value="mid">20 - 22</option>
+      <option value="low">Less than 20</option>
+    </select>
 
-  <label for="lastIncrement">Last Salary Increment</label>
-  <select id="lastIncrement">
-    <option value="2plus">Before 2 years</option>
-    <option value="1to2">1–2 years ago</option>
-    <option value="never">Never</option>
-  </select>
+    <label>Last Salary Increment</label>
+    <select id="lastIncrement">
+      <option value="2plus">Before 2 years</option>
+      <option value="1to2">1–2 years ago</option>
+      <option value="never">Never</option>
+    </select>
 
-  <label for="requestedRaise">Requested Raise ($)</label>
-  <select id="requestedRaise">
-    <option value="more5">More than $5</option>
-    <option value="btw3and5">$3 – $5</option>
-    <option value="less3">Less than $3</option>
-  </select>
+    <label>Requested Raise ($)</label>
+    <select id="requestedRaise">
+      <option value="more5">More than $5</option>
+      <option value="btw3and5">$3 – $5</option>
+      <option value="less3">Less than $3</option>
+    </select>
 
-  <button onclick="calculateScore()">Calculate Decision</button>
+    <button onclick="calculateScore()">Calculate Decision</button>
 
-  <div class="result" id="result"></div>
+    <div id="result" class="result"></div>
+  </div>
 
   <script>
     function calculateScore() {
       let score = 0;
+      let reasons = [];
 
       const months = parseInt(document.getElementById('months').value);
       const visa = document.getElementById('visa').value;
@@ -138,58 +168,48 @@
       const lastIncrement = document.getElementById('lastIncrement').value;
       const requestedRaise = document.getElementById('requestedRaise').value;
 
-      // Months With Us
-      if (months > 24) score += 2;
-      else if (months >= 13) score += 1;
+      if (months > 24) { score += 2; reasons.push(\"Good loyalty (24+ months)\"); }
+      else if (months >= 13) { score += 1; reasons.push(\"Decent loyalty (13-24 months)\"); }
 
-      // Visa Type
-      if (visa === 'GC_USC') score += 1;
+      if (visa === 'GC_USC') { score += 1; reasons.push(\"Stable Visa Status (GC/USC)\"); }
 
-      // GC Obligation
-      if (obligation === 'not_filed') score += 2;
+      if (obligation === 'not_filed') { score += 2; reasons.push(\"GC Not Filed - More flexible\"); }
 
-      // Vendor Contact
-      if (vendor === 'high') score += 2;
-      else if (vendor === 'mid') score += 1;
+      if (vendor === 'high') { score += 2; reasons.push(\"Strong Prime Vendor Relationship\"); }
+      else if (vendor === 'mid') { score += 1; reasons.push(\"Decent Vendor Relationship\"); }
 
-      // Referral Probability
-      if (referral === 'high') score += 2;
-      else if (referral === 'mid') score += 1;
+      if (referral === 'high') { score += 2; reasons.push(\"High Referral Potential\"); }
+      else if (referral === 'mid') { score += 1; reasons.push(\"Some Referral Potential\"); }
 
-      // Withdrawal Risk
-      if (withdrawal === 'low') score += 2;
-      else if (withdrawal === 'mid') score += 1;
+      if (withdrawal === 'low') { score += 2; reasons.push(\"Low Risk of Withdrawal\"); }
+      else if (withdrawal === 'mid') { score += 1; reasons.push(\"Moderate Withdrawal Risk\"); }
 
-      // New Margin
-      if (margin === 'high') score += 2;
-      else if (margin === 'mid') score += 1;
+      if (margin === 'high') { score += 2; reasons.push(\"Strong Margin\"); }
+      else if (margin === 'mid') { score += 1; reasons.push(\"Acceptable Margin\"); }
 
-      // Last Salary Increment
-      if (lastIncrement === '2plus' || lastIncrement === 'never') score += 2;
-      else if (lastIncrement === '1to2') score += 1;
+      if (lastIncrement === '2plus' || lastIncrement === 'never') { score += 2; reasons.push(\"Long time since last increment\"); }
+      else if (lastIncrement === '1to2') { score += 1; reasons.push(\"Moderate time since increment\"); }
 
-      // Requested Raise
-      if (requestedRaise === 'less3') score += 2;
-      else if (requestedRaise === 'btw3and5') score += 1;
+      if (requestedRaise === 'less3') { score += 2; reasons.push(\"Low raise requested (<$3)\"); }
+      else if (requestedRaise === 'btw3and5') { score += 1; reasons.push(\"Moderate raise requested ($3-$5)\"); }
+      else { reasons.push(\"High raise requested (>5$)\"); }
 
-      let decision = "❌ Decline";
-      let reason = "";
+      let decisionText = \"❌ Decline\";
+      let resultClass = \"decline\";
 
-      if (score >= 14) {
-        decision = "✅ Approve";
-        reason = "Candidate adds strong strategic value through vendor ties and referrals. Low raise request, long tenure, and solid margin make this increment justifiable.";
-      } else if (score >= 11) {
-        decision = "⚠️ Consider";
-        reason = "Candidate shows potential, but value is borderline. Check project necessity, upcoming replacements, and talk with BD for vendor pipeline.";
-      } else {
-        decision = "❌ Decline";
-        reason = "Low strategic value or high raise request with average tenure. Risk doesn't justify increment. Visa may obligate continuation regardless.";
+      if (score >= 15) {
+        decisionText = \"✅ Approve\";
+        resultClass = \"approve\";
+      } else if (score >= 12) {
+        decisionText = \"⚠️ Consider\";
+        resultClass = \"consider\";
       }
 
+      document.getElementById('result').className = 'result ' + resultClass;
       document.getElementById('result').innerHTML = `
         <strong>Score:</strong> ${score}/18<br>
-        <strong>Final Decision:</strong> ${decision}<br><br>
-        <strong>Reasoning:</strong> ${reason}
+        <strong>Decision:</strong> ${decisionText}<br><br>
+        <strong>Reasons:</strong><ul>${reasons.map(r => `<li>${r}</li>`).join('')}</ul>
       `;
     }
   </script>
